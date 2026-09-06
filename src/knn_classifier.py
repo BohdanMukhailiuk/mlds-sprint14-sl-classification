@@ -16,6 +16,7 @@ def read_csv(file_path):
     Returns:
     pd.DataFrame: Loaded data.
     """
+    data = pd.read_csv(file_path)
 
     return data
 
@@ -33,6 +34,9 @@ def train_knn_classifier(X, y, k):
     KNeighborsClassifier: Trained K-NN model.
     """
 
+    model = KNeighborsClassifier(n_neighbors=k)
+    model.fit(X, y)
+
     return model
 
 
@@ -47,6 +51,10 @@ def evaluate_model(y_true, y_pred):
     Returns:
     dict: Evaluation metrics (accuracy, precision, recall, F1-score).
     """
+    accuracy = accuracy_score(y_true, y_pred)
+    precision = precision_score(y_true, y_pred, average="weighted")
+    recall = recall_score(y_true, y_pred, average="weighted")
+    f1 = f1_score(y_true, y_pred, average="weighted")
 
     return {"Accuracy": accuracy, "Precision": precision, "Recall": recall, "F1-Score": f1}
 
